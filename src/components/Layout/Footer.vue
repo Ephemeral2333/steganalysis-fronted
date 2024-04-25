@@ -23,7 +23,7 @@ export default {
   line-height: 60px;
   /*居于底部*/
   position: fixed;
-  bottom: 0;
+  bottom: -10px;
   width: 100%;
 }
 .left {
