@@ -15,7 +15,7 @@
                 <template v-else>
                     <el-dropdown @command="logout">
                         <span class="el-dropdown-link">
-                            欢迎<i class="el-icon-arrow-down el-icon--right"></i>
+                            欢迎使用，{{ useremail }}<i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item command="logout">退出</el-dropdown-item>
