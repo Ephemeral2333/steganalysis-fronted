@@ -59,10 +59,15 @@ export default {
                     console.log(res)
                     if (res.code === 200) {
                         this.$message.success('登录成功')
-                        // 将token存储到store中
-                        // this.$store.commit('setToken', res.data.token)
+                        // 将token存储到localStorage中
+                        localStorage.setItem('token', res.message.token)
+                        // 将email存储到localStorage中
+                        localStorage.setItem('email', res.message.email)
                         // 跳转到首页
-                        this.$router.push('/')
+                        this.$router.push('/').finally(() => {
+                            // 刷新页面
+                            location.reload()
+                        })
                     } else {
                         this.$message.error('登录失败')
                     }

@@ -9,8 +9,14 @@
                     <el-table-column prop="image" label="图片">
                         <template slot-scope="scope">
                             <el-image :src="scope.row.image" :fit="fit" @click.native="handleDownload(scope.row.image)">
-
                             </el-image>
+                        </template>
+                    </el-table-column>
+                    <!--添加下载图标-->
+                    <el-table-column label="下载链接">
+                        <template slot-scope="scope">
+                            <!--注意使用icon-->
+                            <i class="el-icon-download" @click="handleDownload(scope.row.image)"></i>
                         </template>
                     </el-table-column>
                     <el-table-column prop="result" label="结果">
@@ -31,7 +37,6 @@ export default {
     name: 'Tips',
     mounted() {
         bus.$on('analyze_result', msg => {
-            console.log(msg)
             const image = 'http://' + msg.url
             const result = msg.result
             /* 添加到table去 */
@@ -43,13 +48,9 @@ export default {
     },
     data() {
         return {
-            tableData: [{
-                image: 'https://www.baidu.com/img/bd_logo1.png',
-                result: '百度'
-            }, {
-                image: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-                result: '谷歌'
-            }]
+            tableData: [
+
+            ]
         }
     },
     methods: {

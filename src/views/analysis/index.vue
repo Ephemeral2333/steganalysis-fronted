@@ -30,14 +30,17 @@ export default {
     },
     methods: {
         isLoggin() {
-            // if (store.state.token === null) {
-            //     this.$message.error('请先登录')
-            //     return false
-            // }
+            if (localStorage.getItem('token') === null){
+                this.$message.error('请先登录')
+                return false
+            }
         },
         upload_success(response, file, fileList) {
-            console.log(response.message)
-            bus.$emit('analyze_result', response.message)
+            if (response.code !== 200) {
+                this.$message.error(response.message)
+            } else {
+                bus.$emit('analyze_result', response.message)
+            }
         }
     }
 }
