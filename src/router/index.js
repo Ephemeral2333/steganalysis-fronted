@@ -26,6 +26,11 @@ const routes = [
     path: "/steganography",
     name: "Steganography",
     component: () => import("@/views/steganography"),
+  },
+  {
+    path: "/history",
+    name: "History",
+    component: () => import("@/views/history"),
   }
 ];
 

@@ -5,8 +5,7 @@
             <el-menu-item index="2">
                 隐写术
             </el-menu-item>
-            <el-menu-item index="3" disabled>历史记录</el-menu-item>
-            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">下载结果</a></el-menu-item>
+            <el-menu-item index="3">历史记录</el-menu-item>
             <!--登录-->
             <el-menu-item index="5" style="float: right">
                 <template v-if="!isLogin">
@@ -50,6 +49,8 @@ export default {
             this.activeIndex = '1';
         } else if (this.$route.path === '/steganography') {
             this.activeIndex = '2';
+        } else if (this.$route.path === '/history') {
+            this.activeIndex = '3';
         }
     },
     methods: {
@@ -59,6 +60,8 @@ export default {
                 this.$router.push('/');
             } else if (key === '2') {
                 this.$router.push('/steganography');
+            } else if (key === '3') {
+                this.$router.push('/history');
             }
         },
         logout() {

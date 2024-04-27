@@ -13,6 +13,7 @@ service.interceptors.request.use(
   (config) => {
     if (localStorage.getItem("token") !== null) {
       config.headers["Authorization"] = localStorage.getItem("token");
+      config.headers["Email"] = localStorage.getItem("email");
     }
     return config;
   },
@@ -35,9 +36,9 @@ service.interceptors.response.use(
         showClose: true,
         message: res.message || "Error",
         type: "error",
-        duration: 3 * 1000,
+        duration: 5 * 1000,
       });
-      return Promise.reject(new Error(res.message || "Error"));
+      return res;
     } else {
       return res;
     }

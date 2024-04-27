@@ -9,7 +9,7 @@
                     :cell-style="{ 'text-align': 'center' }" style="width: 100%">
                     <el-table-column prop="image" label="图片">
                         <template slot-scope="scope">
-                            <el-image :src="scope.row.jpeg_image" :fit="fit" @click.native="">
+                            <el-image :src="scope.row.jpeg_image" :fit="fit">
                             </el-image>
                         </template>
                     </el-table-column>
