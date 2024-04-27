@@ -2,12 +2,11 @@
     <div>
         <el-card>
             <div slot="header">
-                <span>上传文件</span>
+                <span>隐写分析</span>
             </div>
             <div class="upload">
                 <el-upload class="upload-demo" drag action="http://127.0.0.1:5000/analyze/result" multiple="false"
-                    :on-success="upload_success"
-                    :before-upload="isLoggin">
+                    :on-success="upload_success" :before-upload="beforeUpload" :data="uploadData">
                     <i class="el-icon-upload"></i>
                     <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                     <div class="el-upload__tip" slot="tip" style="text-align: center;">只能上传jpg/png文件，且不超过500kb</div>
@@ -25,12 +24,14 @@ export default {
     name: 'Analysis',
     data() {
         return {
-
+            uploadData: {
+                email: localStorage.getItem('email')
+            }
         }
     },
     methods: {
-        isLoggin() {
-            if (localStorage.getItem('token') === null){
+        beforeUpload() {
+            if (localStorage.getItem('token') === null) {
                 this.$message.error('请先登录')
                 return false
             }

@@ -22,6 +22,11 @@ const routes = [
     name: "Login",
     component: () => import("@/views/login"),
   },
+  {
+    path: "/steganography",
+    name: "Steganography",
+    component: () => import("@/views/steganography"),
+  }
 ];
 
 const router = new VueRouter({

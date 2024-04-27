@@ -30,6 +30,12 @@
 <script>
 export default {
     name: 'Header',
+    data() {
+        return {
+            activeIndex: '1',
+            useremail: localStorage.getItem('email')
+        };
+    },
     computed: {
         isLogin() {
             if (localStorage.getItem('token')) {
@@ -39,11 +45,12 @@ export default {
             }
         }
     },
-    data() {
-        return {
-            activeIndex: '1',
-            useremail: localStorage.getItem('email')
-        };
+    created() {
+        if (this.$route.path === '/') {
+            this.activeIndex = '1';
+        } else if (this.$route.path === '/steganography') {
+            this.activeIndex = '2';
+        }
     },
     methods: {
         handleSelect(key, keyPath) {
