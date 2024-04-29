@@ -1,39 +1,57 @@
 <template>
     <div>
-        <el-card>
+        <el-card class="content">
             <div slot="header">
                 <span>隐写嵌入</span>
             </div>
 
-            <el-form ref="form" :model="form">
-                <el-form-item label="选择文件">
-                    <el-upload ref="upload" class="upload-demo" drag action="http://" :on-success="upload_success"
-                        :before-upload="isLoggin" :auto-upload="false">
-                        <i class="el-icon-upload"></i>
-                        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-                    </el-upload>
-                </el-form-item>
-                <!--添加两个单选框-->
-                <el-form-item label="选择隐写方式">
-                    <el-radio-group v-model="form.radio">
-                        <el-radio label="1">HUGO</el-radio>
-                        <el-radio label="2">WOW</el-radio>
-                        <el-radio label="3">S-Uniward</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="选择嵌入率">
-                    <el-radio-group v-model="form.alpha">
-                        <el-radio label="0.4">0.4 bpp</el-radio>
-                        <el-radio label="0.7">0.7 bpp</el-radio>
-                        <el-radio label="1.0">1.0 bpp</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="submitForm('form')">提交</el-button>
-                    <el-button @click="downloadUrl" style="display:none" class="download">下载</el-button>
-                </el-form-item>
-            </el-form>
+            <el-row>
+                <el-col :span="12">
+                    <el-form ref="form" :model="form">
+                        <el-form-item label="选择文件">
+                            <el-upload ref="upload" class="upload-demo" drag action="http://" :on-success="upload_success"
+                                :before-upload="isLoggin" :auto-upload="false">
+                                <i class="el-icon-upload"></i>
+                                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                            </el-upload>
+                        </el-form-item>
+                        <!--添加两个单选框-->
+                        <el-form-item label="选择隐写方式">
+                            <el-radio-group v-model="form.radio">
+                                <el-radio label="1">HUGO</el-radio>
+                                <el-radio label="2">WOW</el-radio>
+                                <el-radio label="3">S-Uniward</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item label="选择嵌入率">
+                            <el-radio-group v-model="form.alpha">
+                                <el-radio label="0.4">0.4 bpp</el-radio>
+                                <el-radio label="0.7">0.7 bpp</el-radio>
+                                <el-radio label="1.0">1.0 bpp</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('form')">提交</el-button>
+                            <el-button @click="downloadUrl" style="display:none" class="download">下载</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-col>
+                <el-col :span="12">
+                    <div class="tip">
+                        <el-card>
+                            <div slot="header">
+                                <span>注意事项</span>
+                            </div>
+                            <div>
+                                <p>1、使用隐写术可以无需登录，该功能仅作工具使用，无需登录，也没有历史记录</p>
+                                <p>2、目前隐写术不能指定隐写内容，使用的隐写术仅用作测试隐写分析效果，隐写术均随机嵌入该嵌入率下的最不容易被分析出来的内容</p>
+                                <p>3、隐写术嵌入率越高，嵌入内容越不容易被分析出来</p>
+                                <p>4、目前给出的隐写术均为空域隐写算法，请给出.pgm格式的文件</p>
+                            </div>
+                        </el-card>
+                    </div>
+                </el-col>
+            </el-row>
         </el-card>
     </div>
 </template>
@@ -76,8 +94,10 @@ export default {
                             this.$message.success('上传成功')
                             // 上传成功后，下载按钮显示
                             document.querySelector('.download').style.display = 'inline-block';
+                            // 清除上传文件
+                            this.$refs.upload.clearFiles();
                         } else {
-                            this.$message.error('上传失败')
+                            this.$message.error('上传失败') 
                         }
                     })
 
@@ -101,4 +121,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.content {
+    height: 700px;
+}
+</style>

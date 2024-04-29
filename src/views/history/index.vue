@@ -25,7 +25,8 @@
             <!--下载-->
             <el-table-column label="下载">
                 <template slot-scope="scope">
-                    <i class="el-icon-download" @click="handleDownload(scope.row.image)"></i>
+                    <!-- <i class="el-icon-download" @click="handleDownload(scope.row.image)"></i> -->
+                    <el-link type="primary" :href="scope.row.image" target="_blank">下载图片</el-link>
                 </template>
             </el-table-column>
         </el-table>
@@ -41,7 +42,7 @@ export default {
             tableData: []
         };
     },
-    created() {
+    mounted() {
         getHistory().then(res => {
             if (res.code === 200) {
                 this.tableData = res.data;
@@ -49,6 +50,20 @@ export default {
                     this.tableData[i].image = 'http://' + this.tableData[i].image;
                     this.tableData[i].image_show = 'http://' + this.tableData[i].image_show;
                 }
+            } else {
+                // 弹窗询问是否重新登录
+                this.$confirm('登录已过期，是否登录', '提示', {
+                    confirmButtonText: '登录',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$router.push('/login');
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消登录'
+                    });
+                });
             }
         });
     },

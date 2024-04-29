@@ -1,6 +1,13 @@
 <template>
     <header class="header has-background-white has-text-black">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <!--添加项目名称图标-->
+            <el-menu-item>
+                <img src="../../assets/logo.jpg" alt="logo" style="width: 35px; height: 35px;">
+                &nbsp;&nbsp;
+                <span class="logoText">隐写分析系统</span>
+                <el-divider direction="vertical"></el-divider>
+            </el-menu-item>
             <el-menu-item index="1">隐写分析</el-menu-item>
             <el-menu-item index="2">
                 隐写术
@@ -62,6 +69,9 @@ export default {
                 this.$router.push('/steganography');
             } else if (key === '3') {
                 this.$router.push('/history');
+            } else if (key === '0') {
+                this.activeIndex = '1';
+                this.$router.push('/');
             }
         },
         logout() {
@@ -95,5 +105,11 @@ export default {
 <style scoped>
 .header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logoText {
+    font-size: 15px;
+    font-weight: bold;
+    font-family: STFangsong;
 }
 </style>
