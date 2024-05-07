@@ -12,7 +12,6 @@
 <script>
 import Analysis from '@/views/analysis/index.vue';
 import Tips from '@/views/tips/index.vue';
-import { getHello } from '@/api/hello.js';
 export default {
     data() {
         return {

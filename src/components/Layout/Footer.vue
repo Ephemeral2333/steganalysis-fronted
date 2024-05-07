@@ -4,7 +4,7 @@
       © 2024 河南工业大学人工智能与大数据学院
     </div>
     <div class="right">
-      <i class="el-icon-phone"></i> 0371-67781122
+      <i class="el-icon-message"></i> liyh0703@gmail.com
     </div>
   </el-footer>
 </template>

@@ -10,9 +10,10 @@
                     <el-form ref="form" :model="form">
                         <el-form-item label="选择文件">
                             <el-upload ref="upload" class="upload-demo" drag action="http://" :on-success="upload_success"
-                                :before-upload="isLoggin" :auto-upload="false">
+                                :before-upload="isLoggin" :auto-upload="false" accept=".pgm">
                                 <i class="el-icon-upload"></i>
                                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                                <div class="el-upload__tip" slot="tip" style="margin-left: 190px;">只能上传pgm文件</div>
                             </el-upload>
                         </el-form-item>
                         <!--添加两个单选框-->
@@ -45,7 +46,7 @@
                             <div>
                                 <p>1、使用隐写术可以无需登录，该功能仅作工具使用，无需登录，也没有历史记录</p>
                                 <p>2、目前隐写术不能指定隐写内容，使用的隐写术仅用作测试隐写分析效果，隐写术均随机嵌入该嵌入率下的最不容易被分析出来的内容</p>
-                                <p>3、隐写术嵌入率越高，嵌入内容越不容易被分析出来</p>
+                                <p>3、隐写术嵌入率越低，嵌入内容越不容易被分析出来</p>
                                 <p>4、目前给出的隐写术均为空域隐写算法，请给出.pgm格式的文件</p>
                             </div>
                         </el-card>
@@ -83,7 +84,15 @@ export default {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     const formData = new FormData();
-                    formData.append('file', this.$refs.upload.uploadFiles[0].raw);
+                    if (this.$refs.upload.uploadFiles.length === 0) {
+                        this.$message.error('请上传文件')
+                        return false
+                    } else if(this.$refs.upload.uploadFiles[0].name.split('.')[1] !== 'pgm'){
+                        this.$message.error('请上传PGM格式文件')
+                        return false
+                    } else {
+                        formData.append('file', this.$refs.upload.uploadFiles[0].raw);
+                    }
                     formData.append('radio', this.form.radio);
                     formData.append('alpha', this.form.alpha);
 

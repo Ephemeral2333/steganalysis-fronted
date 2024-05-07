@@ -51,12 +51,16 @@ export default {
             }
         }
     },
-    created() {
-        if (this.$route.path === '/') {
+    mounted() {
+        const currentPath = window.location.pathname; // 返回 "/history"
+        const pathParts = currentPath.split('/');
+        const lastPart = pathParts[pathParts.length - 1];
+        if (lastPart === '') {
             this.activeIndex = '1';
-        } else if (this.$route.path === '/steganography') {
+        } else if (lastPart === 'steganography') {
             this.activeIndex = '2';
-        } else if (this.$route.path === '/history') {
+        } else if (lastPart === 'history') {
+            console.log('history');
             this.activeIndex = '3';
         }
     },

@@ -1,11 +1,11 @@
 <template>
-    <el-card>
+    <el-card class="content">
         <div slot="header">
             <span>历史记录</span>
         </div>
 
         <el-table :data="tableData" style="width: 100%" :header-cell-style="{ 'text-align': 'center' }"
-            :cell-style="{ 'text-align': 'center' }">
+            :cell-style="{ 'text-align': 'center' }" height="690">
             <el-table-column type="index" label="序号" width="100"></el-table-column>
             <!--图片预览-->
             <el-table-column label="图片" width="180">
@@ -29,12 +29,18 @@
                     <el-link type="primary" :href="scope.row.image" target="_blank">下载图片</el-link>
                 </template>
             </el-table-column>
+            <!--删除-->
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button type="danger" size="mini" @click="handleDelete(scope.row.id)">删除</el-button>
+                </template>
+            </el-table-column>
         </el-table>
     </el-card>
 </template>
 
 <script>
-import { getHistory } from '@/api/history';
+import { getHistory, delHistory } from '@/api/history';
 export default {
     name: 'History',
     data() {
@@ -42,7 +48,7 @@ export default {
             tableData: []
         };
     },
-    mounted() {
+    created() {
         getHistory().then(res => {
             if (res.code === 200) {
                 this.tableData = res.data;
@@ -70,9 +76,42 @@ export default {
     methods: {
         handleDownload(url) {
             window.open(url);
+        },
+        handleDelete(id) {
+            // 弹窗询问是否删除
+            this.$confirm('确定删除该历史记录吗?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                // 删除历史记录
+                delHistory(id).then(res => {
+                    if (res.code === 200) {
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        location.reload();
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: '删除失败!'
+                        });
+                    }
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });
+            });
         }
     }
 }
 </script>
 
-<style></style>
+<style>
+.content {
+    margin-bottom: 50px;
+}
+</style>
