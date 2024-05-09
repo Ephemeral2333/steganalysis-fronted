@@ -11,10 +11,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import store from './store'
 
+import * as echarts from 'echarts'
+
 Vue.config.productionTip = false
 
 Vue.use(Buefy)
 Vue.use(ElementUI)
+Vue.prototype.$echarts = echarts;
 
 new Vue({
   router,

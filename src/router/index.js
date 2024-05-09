@@ -31,6 +31,21 @@ const routes = [
     path: "/history",
     name: "History",
     component: () => import("@/views/history"),
+  },
+  {
+    path: "/result",
+    name: "Result",
+    component: () => import("@/views/result"),
+  },
+  {
+    path: "/test/upload",
+    name: "Upload",
+    component: () => import("@/views/test/upload"),
+  },
+  {
+    path: "/test/result",
+    name: "TestResult",
+    component: () => import("@/views/test/result"),
   }
 ];
 

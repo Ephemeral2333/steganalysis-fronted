@@ -32,25 +32,25 @@ service.interceptors.response.use(
     console.log(res);
     // 如果自定义代码不是200，则将其判断为错误。
     if (res.code !== 200) {
-      Message({
-        showClose: true,
-        message: res.message || "Error",
-        type: "error",
-        duration: 5 * 1000,
-      });
+      // Message({
+      //   showClose: true,
+      //   message: res.message || "Error",
+      //   type: "error",
+      //   duration: 5 * 1000,
+      // });
       return res;
     } else {
       return res;
     }
   },
   (error) => {
-    Message({
-      showClose: true,
-      message: error.message,
-      type: "error",
-      duration: 5 * 1000,
-    });
-    return Promise.reject(error);
+    // Message({
+    //   showClose: true,
+    //   message: error.message,
+    //   type: "error",
+    //   duration: 5 * 1000,
+    // });
+    // return Promise.reject(error);
   }
 );
 export default service;

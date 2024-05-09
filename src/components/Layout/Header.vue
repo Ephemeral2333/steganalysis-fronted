@@ -12,7 +12,17 @@
             <el-menu-item index="2">
                 隐写术
             </el-menu-item>
-            <el-menu-item index="3">历史记录</el-menu-item>
+            <!--历史记录与分析结果-->
+            <el-submenu index="3">
+                <template slot="title">历史记录</template>
+                <el-menu-item index="3-1">历史记录</el-menu-item>
+                <el-menu-item index="3-2">分析结果</el-menu-item>
+            </el-submenu>
+            <el-submenu index="4">
+                <template slot="title">模型测试</template>
+                <el-menu-item index="4-1">测试文件上传</el-menu-item>
+                <el-menu-item index="4-2">测试结果</el-menu-item>
+            </el-submenu>
             <!--登录-->
             <el-menu-item index="5" style="float: right">
                 <template v-if="!isLogin">
@@ -61,21 +71,39 @@ export default {
             this.activeIndex = '2';
         } else if (lastPart === 'history') {
             console.log('history');
-            this.activeIndex = '3';
+            this.activeIndex = '3-1';
+        } else if (lastPart === 'result') {
+            const secondLastPart = pathParts[pathParts.length - 2];
+            if (secondLastPart === 'test') {
+                this.activeIndex = '4-2';
+            } else {
+                this.activeIndex = '3-2';
+            }
+        } else if (lastPart === 'upload') {
+            this.activeIndex = '4-1';
+        } else if (lastPart === 'result') {
+            this.activeIndex = '4-2';
         }
     },
     methods: {
         handleSelect(key, keyPath) {
             this.activeIndex = key;
             if (key === '1') {
-                this.$router.push('/');
+                window.location.href = '/';
             } else if (key === '2') {
-                this.$router.push('/steganography');
-            } else if (key === '3') {
-                this.$router.push('/history');
+                window.location.href = '/steganography';
+            } else if (key === '3-1') {
+                // 打开历史记录页面
+                window.location.href = '/history';
             } else if (key === '0') {
                 this.activeIndex = '1';
                 this.$router.push('/');
+            } else if (key === '3-2') {
+                window.location.href = '/result';
+            } else if (key === '4-1') {
+                window.location.href = '/test/upload';
+            } else if (key === '4-2') {
+                window.location.href = '/test/result';
             }
         },
         logout() {
