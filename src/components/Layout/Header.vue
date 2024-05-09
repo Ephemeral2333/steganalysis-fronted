@@ -23,6 +23,11 @@
                 <el-menu-item index="4-1">测试文件上传</el-menu-item>
                 <el-menu-item index="4-2">测试结果</el-menu-item>
             </el-submenu>
+            <el-submenu index="5">
+                <template slot="title">模型对比</template>
+                <el-menu-item index="5-1">训练过程</el-menu-item>
+                <el-menu-item index="5-2">测试结果</el-menu-item>
+            </el-submenu>
             <!--登录-->
             <el-menu-item index="5" style="float: right">
                 <template v-if="!isLogin">
@@ -83,6 +88,10 @@ export default {
             this.activeIndex = '4-1';
         } else if (lastPart === 'result') {
             this.activeIndex = '4-2';
+        } else if (lastPart === 'train') {
+            this.activeIndex = '5-1';
+        } else if (lastPart === 'test') {
+            this.activeIndex = '5-2';
         }
     },
     methods: {
@@ -104,6 +113,10 @@ export default {
                 window.location.href = '/test/upload';
             } else if (key === '4-2') {
                 window.location.href = '/test/result';
+            } else if (key === '5-1') {
+                window.location.href = '/model/train';
+            } else if (key === '5-2') {
+                window.location.href = '/model/test';
             }
         },
         logout() {

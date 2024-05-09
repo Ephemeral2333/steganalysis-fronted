@@ -1,7 +1,7 @@
 <template>
     <el-card class="content">
         <div slot="header" class="clearfix">
-            <span>结果分析</span>
+            <span>结果分析可视化</span>
         </div>
 
         <div class="chart">

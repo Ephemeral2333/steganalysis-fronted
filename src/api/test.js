@@ -30,3 +30,10 @@ export function getExcel() {
     responseType: 'blob'
   })
 }
+
+export function getTrainData() {
+  return request({
+    url: '/data/train',
+    method: 'get'
+  })
+}
