@@ -116,7 +116,7 @@ export default {
                     }
                 ],
                 title: {
-                    text: '预测结果展示',
+                    text: '预测结果统计',
                     left: 'center'
                 }
             };

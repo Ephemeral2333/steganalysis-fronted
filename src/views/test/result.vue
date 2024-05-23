@@ -13,7 +13,7 @@
         </div>
 
         <el-table :data="tableData" style="width: 100%" :header-cell-style="{ 'text-align': 'center' }"
-            :cell-style="{ 'text-align': 'center' }" height="690">
+            :cell-style="{ 'text-align': 'center' }">
             <el-table-column type="index" label="序号" width="100"></el-table-column>
             <!--文件名称-->
             <el-table-column label="文件名称">
@@ -117,14 +117,14 @@ export default {
             // 改变pagesize的大小
             this.queryInfo.pagesize = pagesize
             // 重新加载用户列表数据
-            this.getTestHistory(this.queryInfo)
+            this.getTestResult(this.queryInfo)
         },
         // 监听pagenum的事件(点击第几页)
         handleCurrentChange(pagenum) {
             // 把页码改了
             this.queryInfo.pagenum = pagenum
             // 重新加载用户列表数据
-            this.getTestHistory(this.queryInfo)
+            this.getTestResult(this.queryInfo)
         },
     },
 };

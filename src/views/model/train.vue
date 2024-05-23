@@ -6,7 +6,7 @@
             </div>
 
             <div class="chart">
-                <div ref="echarts" style="width: 800px; height: 500px;"></div>
+                <div ref="echarts" style="width: 900px; height: 500px;"></div>
             </div>
             <br>
             <p style="text-align: center">基于WOW隐写算法下1.0 bpp嵌入率训练过程</p>
@@ -53,12 +53,16 @@ export default {
                 animation: true,
                 animationDuration: 10000,
                 xAxis: {
+                    // 横坐标名称
+                    name: 'Epoch',
                     type: 'category',
                     boundaryGap: false,
                     // 一共25个数据，每两个数据之间间隔为2，显示1-50
-                    data: Array.from({ length: 25 }, (v, k) => k + 1).map(v => v * 2)
+                    data: Array.from({ length: 25 }, (v, k) => k + 1).map(v => v * 2),
                 },
                 yAxis: {
+                    // 纵坐标名称
+                    name: 'Accuracy(%)',
                     type: 'value',
                     // 从60到100，间隔为5
                     min: 60,
